@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tomcat.parkiradmin.PreferenceActivity">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                <include
+                    android:id="@+id/toolbar"
+                    layout="@layout/toolbar"
+                    >
+                </include>
+        </android.support.design.widget.AppBarLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+                <Button
+                    android:id="@+id/btnRequestParkir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnRequestParkir"
+                    tools:layout_editor_absoluteX="53dp"
+                    tools:layout_editor_absoluteY="149dp"
+                    android:layout_marginTop="201dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnLogout"
+                    tools:layout_editor_absoluteX="53dp"
+                    tools:layout_editor_absoluteY="149dp"
+                    android:layout_below="@+id/btnRequestParkir"
+                    android:layout_alignRight="@+id/textView6"
+                    android:layout_alignEnd="@+id/textView6" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cari Parkir v1.0"
+                    android:layout_above="@+id/textView7"
+                    android:layout_centerHorizontal="true" />
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Copyright 2017 TOMCAT Inc."
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="23dp" />
+        </RelativeLayout>
+</LinearLayout>
