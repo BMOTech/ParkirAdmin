@@ -45,23 +45,18 @@
         <activity
             android:name="com.tomcat.parkiradmin.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name="com.tomcat.parkiradmin.zbackup_ListParkirActivity" />
-        <activity android:name="com.tomcat.parkiradmin.DetailParkirActivity" />
         <activity android:name="com.tomcat.parkiradmin.HomeActivity" />
-        <activity
-            android:name="com.tomcat.parkiradmin.LoginActivity"
-            android:label="@string/title_activity_login" />
         <activity android:name="com.tomcat.parkiradmin.MainActivity" />
         <activity android:name="com.tomcat.parkiradmin.PreferenceActivity" />
         <activity android:name="com.tomcat.parkiradmin.SplashScreenActivity"> <!-- android:theme="@style/SplashTheme" -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.tomcat.parkiradmin.RegisterActivity" />
-        <activity android:name="com.tomcat.parkiradmin.RequestParkirActivity"></activity>
+        <activity android:name="com.tomcat.parkiradmin.EditParkirActivity"></activity>
+        <activity android:name="com.tomcat.parkiradmin.AddParkirActivity"></activity>
+        <activity android:name="com.tomcat.parkiradmin.LoginActivity"></activity>
     </application>
 
 </manifest>

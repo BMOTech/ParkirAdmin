@@ -16,10 +16,6 @@ public class MainActivity extends Activity {
 
     }
 
-    public void ClickDaftar(View V){
-        Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-        startActivity(i);
-    }
 
     public void ClickLogin(View V){
         Intent i = new Intent(getApplicationContext(), LoginActivity.class);

@@ -49,8 +49,8 @@ public class HomeActivity extends AppCompatActivity {
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NearbyParkirFragment(), "Nearby");
-        adapter.addFragment(new FavouriteParkirFragment(), "Favorite");
+        adapter.addFragment(new RequestedParkirFragment(), "Requested");
+        adapter.addFragment(new NearbyParkirFragment(), "List Parkir");
         //adapter.addFragment(new ThreeFragment(), "THREE");
         viewPager.setAdapter(adapter);
     }
@@ -68,14 +68,16 @@ public class HomeActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     Bundle bundle = new Bundle();
-                    parkir = getListParkir();
+                    parkir = getListRequestedParkir();
                     bundle.putSerializable("Parkir", parkir);
+                    bundle.putInt("indexTab",1);
                     mFragmentList.get(position).setArguments(bundle);
                     break;
                 case 1:
                     Bundle bundle2 = new Bundle();
-                    parkir2 = getListParkirSave();
+                    parkir2 = getListParkir();
                     bundle2.putSerializable("Parkir", parkir2);
+                    bundle2.putInt("indexTab",2);
                     mFragmentList.get(position).setArguments(bundle2);
                     break;
                 default:
@@ -111,25 +113,27 @@ public class HomeActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent i = new Intent(getApplicationContext(), PreferenceActivity.class);
-            startActivity(i);
-            return true;
+        Intent i;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                i = new Intent(getApplicationContext(), PreferenceActivity.class);
+                startActivity(i);
+                return true;
+            case R.id.action_add_parkir:
+                i = new Intent(getApplicationContext(), AddParkirActivity.class);
+                startActivity(i);
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
 
+    public Parkir[] getListRequestedParkir(){
+        DB db = new DB(this, new User(this));
+        return db.getListRequestedParkir();
+    }
     public Parkir[] getListParkir(){
         DB db = new DB(this, new User(this));
         return db.getListParkir();
-    }
-    public Parkir[] getListParkirSave(){
-        DB db = new DB(this, new User(this));
-        return db.getListParkirSave();
     }
 }

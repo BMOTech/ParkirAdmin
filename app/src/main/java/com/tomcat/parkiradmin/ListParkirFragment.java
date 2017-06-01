@@ -1,9 +1,11 @@
 package com.tomcat.parkiradmin;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tomcat.parkiradmin.Object.Parkir;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import static android.os.Build.VERSION_CODES.M;
+
 /**
  * Created by albertbrucelee on 17/05/17.
  */
@@ -25,12 +32,12 @@ import com.tomcat.parkiradmin.Object.Parkir;
 public class ListParkirFragment extends Fragment {
 
     MapView mMapView;
-    private GoogleMap mMap;
+    protected GoogleMap mMap;
     public Parkir parkir[];
     private LatLng userLatLng;
     public GPSTracker gps;
-
-
+    HashMap<String,Marker> markers = new HashMap<>();
+    public int indexTab;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,7 @@ public class ListParkirFragment extends Fragment {
         StrictMode.setThreadPolicy(policy);
 
         parkir = (Parkir[]) getArguments().getSerializable("Parkir");
+        indexTab = getArguments().getInt("indexTab");
 
         gps = new GPSTracker(getActivity());
         if (gps.canGetLocation()) {
@@ -132,8 +140,8 @@ public class ListParkirFragment extends Fragment {
             LatLng coordinate[] = new LatLng[parkir.length];
             for(int i=0; i<coordinate.length; i++){
                 coordinate[i] = new LatLng(parkir[i].getLatitude(), parkir[i].getLongitude());
-                mMap.addMarker(new MarkerOptions().position(coordinate[i]).title(parkir[i].getName()));
-
+                Marker marker = mMap.addMarker(new MarkerOptions().position(coordinate[i]).title(parkir[i].getName()));
+                markers.put(String.valueOf(parkir[i].getId()),marker);
             }
             mMap.setOnInfoWindowClickListener(getInfoWindowClickListener());
         }
@@ -146,14 +154,33 @@ public class ListParkirFragment extends Fragment {
             @Override
             public void onInfoWindowClick(Marker marker)
             {
-
-                goDetail(marker.getId());
+                goDetail(marker.getId(),indexTab);
             }
         };
     }
-    public void goDetail(String id){
-        Intent intent = new Intent(getActivity(), DetailParkirActivity.class);
-        intent.putExtra("parkir_id",parkir[Integer.parseInt(id.substring(1,id.length()))].getId());
+    public void goDetail(String id, int indexTab){
+        Intent intent = new Intent(getActivity(), EditParkirActivity.class);
+        intent.putExtra("idParkir",parkir[Integer.parseInt(id.substring(1,id.length()))].getId());
+        intent.putExtra("indexTab",indexTab);
         startActivityForResult(intent,1);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                boolean isSuccess = data.getBooleanExtra("isSuccess", false);
+                int idParkir = data.getIntExtra("idParkir", 0);
+                if(isSuccess){
+                    Marker marker = markers.get(String.valueOf(idParkir));
+                    marker.remove();
+                    markers.remove(String.valueOf(idParkir));
+                }
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
 }

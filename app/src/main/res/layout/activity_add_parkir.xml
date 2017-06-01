@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tomcat.parkiradmin.RequestParkirActivity">
+    tools:context="com.tomcat.parkiradmin.AddParkirActivity">
 
 
     <LinearLayout
@@ -97,8 +97,7 @@
                     android:id="@+id/inputPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="numberDecimal" />
+                    android:ems="10"/>
 
                 <TextView
                     android:id="@+id/textView8"

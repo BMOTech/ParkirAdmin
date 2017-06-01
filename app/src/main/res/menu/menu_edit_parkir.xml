@@ -3,14 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".DetailParkirActivity">
+    tools:context=".EditParkirActivity">
     <item
-        android:id="@+id/action_save"
+        android:id="@+id/action_delete_parkir"
         android:orderInCategory="100"
-        android:title="Save"
-        android:icon="@mipmap/star_white"
-        app:showAsAction="ifRoom"
-        />
+        android:title="Delete Parkir"
+        android:icon="@mipmap/trash"
+        app:showAsAction="always" />
     <!--
     <item
         android:id="@+id/action_search"

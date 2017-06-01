@@ -23,25 +23,15 @@
             >
 
                 <Button
-                    android:id="@+id/btnRequestParkir"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btnRequestParkir"
-                    tools:layout_editor_absoluteX="53dp"
-                    tools:layout_editor_absoluteY="149dp"
-                    android:layout_marginTop="201dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
-                <Button
                     android:id="@+id/btnLogout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/btnLogout"
                     tools:layout_editor_absoluteX="53dp"
                     tools:layout_editor_absoluteY="149dp"
-                    android:layout_below="@+id/btnRequestParkir"
-                    android:layout_alignRight="@+id/textView6"
-                    android:layout_alignEnd="@+id/textView6" />
+                    android:layout_marginTop="201dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
 
                 <TextView
                     android:id="@+id/textView6"

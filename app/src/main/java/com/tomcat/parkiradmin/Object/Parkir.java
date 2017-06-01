@@ -16,6 +16,12 @@ public class Parkir implements Serializable {
     private int capacity;
     private int available;
 
+    public Parkir(){
+        name=address="";
+        price="0";
+        capacity=available=0;
+    }
+
     public int getId() {
         return id;
     }

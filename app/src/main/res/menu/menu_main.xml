@@ -9,6 +9,12 @@
         android:orderInCategory="100"
         android:title="Setting"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_add_parkir"
+        android:orderInCategory="200"
+        android:title="Add Parkir"
+        android:icon="@mipmap/add"
+        app:showAsAction="always" />
     <!--
     <item
         android:id="@+id/action_search"

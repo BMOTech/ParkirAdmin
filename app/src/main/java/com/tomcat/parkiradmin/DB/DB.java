@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static android.R.attr.name;
+
 /**
  * Created by albertbrucelee on 26/04/17.
  */
@@ -90,6 +92,41 @@ public class DB {
         else        //jika tidak sukses ambil data (error);
             return null;
     }
+
+    public Parkir[] getListRequestedParkir(){
+        int signal=dbH.getListRequestedParkir();       //ambil data dari server. Nanti data akan disimpan dulu di DBServer. signal buat melihat apakah query sukses atau failed
+        if (signal==0){                     //jika sukses
+            return listParkir();
+        }
+        else        //jika tidak sukses ambil data (error);
+            return null;
+    }
+    public Parkir getDetailRequestedParkir(String parkirId){
+        int signal=dbH.getDetailRequestedParkir(parkirId);       //ambil data dari server. Nanti data akan disimpan dulu di DBServer. signal buat melihat apakah query sukses atau failed
+        if (signal==0){                     //jika sukses
+            JSONArray json=dbH.get();        //ambil data di DBServer! Data akan seperti: [{"nama":"Albert"}]
+
+            Parkir parkir = new Parkir();
+
+            try{
+                JSONObject jData = json.getJSONObject(0);   //ambil data object ke 0
+                parkir.setId(jData.getInt("id"));
+                parkir.setLatitude(jData.getDouble("latitude"));
+                parkir.setLongitude(jData.getDouble("longitude"));
+                parkir.setName(jData.getString("name"));
+                parkir.setAddress(jData.getString("address"));
+                parkir.setPrice(jData.getString("price"));
+                parkir.setCapacity(jData.getInt("capacity"));
+                parkir.setAvailable(jData.getInt("available"));
+            }catch (JSONException e){                       //jika JSON error
+                signal=1;
+                Log.e("DB JParser", "Error parsing data " + e.toString());    //pesan ke logcat
+            }
+            return parkir;
+        }
+        else        //jika tidak sukses ambil data (error);
+            return null;
+    }
     public int checkParkirSave(String parkirId){
         int signal=dbH.checkParkirSave(parkirId);       //ambil data dari server. Nanti data akan disimpan dulu di DBServer. signal buat melihat apakah query sukses atau failed
         int total=0;
@@ -123,6 +160,32 @@ public class DB {
         else
             return false;
     }
+    public int requestParkir(double lat, double lng, String name, String address, String price, int capacity){
+        int signal=dbH.requestParkir(lat, lng, name, address, price, capacity);
+        return signal;
+    }
+
+
+    public int addParkir(Parkir parkir){
+        int signal=dbH.addParkir(parkir.getLatitude(), parkir.getLongitude(), parkir.getName(), parkir.getAddress(), parkir.getPrice(), parkir.getCapacity());
+        return signal;
+    }
+    public int editParkir(Parkir parkir){
+        int signal=dbH.editParkir(parkir.getId(), parkir.getLatitude(), parkir.getLongitude(), parkir.getName(), parkir.getAddress(), parkir.getPrice(), parkir.getCapacity());
+        return signal;
+    }
+    public int deleteParkir(int parkirId){
+        int signal=dbH.deleteParkir(parkirId);
+        return signal;
+    }
+    public int confirmRequestedParkir(Parkir parkir){
+        int signal=dbH.confirmRequestedParkir(parkir.getId(), parkir.getLatitude(), parkir.getLongitude(), parkir.getName(), parkir.getAddress(), parkir.getPrice(), parkir.getCapacity());
+        return signal;
+    }
+    public int deleteRequestedParkir(int parkirId){
+        int signal=dbH.deleteRequestedParkir(parkirId);
+        return signal;
+    }
 
     public boolean login(){
 
@@ -140,10 +203,6 @@ public class DB {
             return true;
         }
         return false;
-    }
-    public int requestParkir(double lat, double lng, String name, String address, String price, int capacity){
-        int signal=dbH.requestParkir(lat, lng, name, address, price, capacity);
-        return signal;
     }
     public boolean register(){
 

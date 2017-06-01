@@ -16,7 +16,7 @@ import java.util.List;
 */
 public class DBHelper {
     //private String url="http://192.168.1.123/scs/index.php";
-    private String url="http://192.168.1.14/parkir/operator.php";  //192.168.1.14
+    private String url="http://192.168.1.14/parkir/admin.php";  //192.168.1.14
 
     private DBServer dbS;
     private DBLocal dbL;
@@ -96,6 +96,81 @@ public class DBHelper {
         params.add(new BasicNameValuePair("password", password));
         return send(params);
     }
+
+
+    public int getListRequestedParkir(){
+        List<NameValuePair> params=new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("action", "getListRequestedParkir"));
+        params.add(new BasicNameValuePair("id", id));
+        params.add(new BasicNameValuePair("password", password));
+        return send(params);
+    }
+    public int getDetailRequestedParkir(String parkirId){
+        List<NameValuePair> params=new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("action", "getDetailRequestedParkir"));
+        params.add(new BasicNameValuePair("parkir_id", parkirId));
+        params.add(new BasicNameValuePair("id", id));
+        params.add(new BasicNameValuePair("password", password));
+        return send(params);
+    }
+    public int addParkir(double lat, double lng, String name, String address, String price, int capacity){
+        List<NameValuePair> params=new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("action", "addParkir"));
+        params.add(new BasicNameValuePair("parkir_lat", ""+lat));
+        params.add(new BasicNameValuePair("parkir_lng", ""+lng));
+        params.add(new BasicNameValuePair("parkir_name", name));
+        params.add(new BasicNameValuePair("parkir_address", address));
+        params.add(new BasicNameValuePair("parkir_price", price));
+        params.add(new BasicNameValuePair("parkir_capacity", ""+capacity));
+        params.add(new BasicNameValuePair("id", id));
+        params.add(new BasicNameValuePair("password", password));
+        return send(params);
+    }
+    public int editParkir(int parkirId, double lat, double lng, String name, String address, String price, int capacity){
+        List<NameValuePair> params=new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("action", "editParkir"));
+        params.add(new BasicNameValuePair("parkir_id", ""+parkirId));
+        params.add(new BasicNameValuePair("parkir_lat", ""+lat));
+        params.add(new BasicNameValuePair("parkir_lng", ""+lng));
+        params.add(new BasicNameValuePair("parkir_name", name));
+        params.add(new BasicNameValuePair("parkir_address", address));
+        params.add(new BasicNameValuePair("parkir_price", price));
+        params.add(new BasicNameValuePair("parkir_capacity", ""+capacity));
+        params.add(new BasicNameValuePair("id", id));
+        params.add(new BasicNameValuePair("password", password));
+        return send(params);
+    }
+    public int deleteParkir(int parkirId){
+        List<NameValuePair> params=new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("action", "deleteParkir"));
+        params.add(new BasicNameValuePair("parkir_id", ""+parkirId));
+        params.add(new BasicNameValuePair("id", id));
+        params.add(new BasicNameValuePair("password", password));
+        return send(params);
+    }
+    public int confirmRequestedParkir(int parkirId, double lat, double lng, String name, String address, String price, int capacity){
+        List<NameValuePair> params=new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("action", "confirmRequestedParkir"));
+        params.add(new BasicNameValuePair("parkir_id", ""+parkirId));
+        params.add(new BasicNameValuePair("parkir_lat", ""+lat));
+        params.add(new BasicNameValuePair("parkir_lng", ""+lng));
+        params.add(new BasicNameValuePair("parkir_name", name));
+        params.add(new BasicNameValuePair("parkir_address", address));
+        params.add(new BasicNameValuePair("parkir_price", price));
+        params.add(new BasicNameValuePair("parkir_capacity", ""+capacity));
+        params.add(new BasicNameValuePair("id", id));
+        params.add(new BasicNameValuePair("password", password));
+        return send(params);
+    }
+    public int deleteRequestedParkir(int parkirId){
+        List<NameValuePair> params=new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("action", "deleteRequestedParkir"));
+        params.add(new BasicNameValuePair("parkir_id", ""+parkirId));
+        params.add(new BasicNameValuePair("id", id));
+        params.add(new BasicNameValuePair("password", password));
+        return send(params);
+    }
+
 
     public int login(String username, String password){
         List<NameValuePair> params=new ArrayList<NameValuePair>();
