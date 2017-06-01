@@ -38,14 +38,6 @@ public class DB {
         else        //jika tidak sukses ambil data (error);
             return null;
     }
-    public Parkir[] getListParkirSave(){
-        int signal=dbH.getListParkirSave();       //ambil data dari server. Nanti data akan disimpan dulu di DBServer. signal buat melihat apakah query sukses atau failed
-        if (signal==0){                     //jika sukses
-            return listParkir();
-        }
-        else        //jika tidak sukses ambil data (error);
-            return null;
-    }
     public Parkir[] listParkir(){
         JSONArray json=dbH.get();        //ambil data di DBServer! Data akan seperti: [{"nama":"Albert"}]
 
@@ -127,43 +119,6 @@ public class DB {
         else        //jika tidak sukses ambil data (error);
             return null;
     }
-    public int checkParkirSave(String parkirId){
-        int signal=dbH.checkParkirSave(parkirId);       //ambil data dari server. Nanti data akan disimpan dulu di DBServer. signal buat melihat apakah query sukses atau failed
-        int total=0;
-        if (signal==0){                     //jika sukses
-            JSONArray json=dbH.get();        //ambil data di DBServer! Data akan seperti: [{"nama":"Albert"}]
-
-
-            try{
-                JSONObject jData = json.getJSONObject(0);   //ambil data object ke 0
-                total = jData.getInt("total");
-            }catch (JSONException e){                       //jika JSON error
-                signal=1;
-                Log.e("DB JParser", "Error parsing data " + e.toString());    //pesan ke logcat
-            }
-            return total;
-        }
-        else        //jika tidak sukses ambil data (error);
-            return total;
-    }
-    public boolean saveParkir(String parkirId){
-        int signal=dbH.saveParkir(parkirId);       //ambil data dari server. Nanti data akan disimpan dulu di DBServer. signal buat melihat apakah query sukses atau failed
-        if(signal==0)
-            return true;
-        else
-            return false;
-    }
-    public boolean removeSaveParkir(String parkirId){
-        int signal=dbH.removeSaveParkir(parkirId);       //ambil data dari server. Nanti data akan disimpan dulu di DBServer. signal buat melihat apakah query sukses atau failed
-        if(signal==0)
-            return true;
-        else
-            return false;
-    }
-    public int requestParkir(double lat, double lng, String name, String address, String price, int capacity){
-        int signal=dbH.requestParkir(lat, lng, name, address, price, capacity);
-        return signal;
-    }
 
 
     public int addParkir(Parkir parkir){
@@ -200,16 +155,6 @@ public class DB {
             }catch (JSONException e){
                 Log.e("Login.class JSON Parser", "Error parsing data " + e.toString());
             }
-            return true;
-        }
-        return false;
-    }
-    public boolean register(){
-
-        int signal=dbH.register(user.getUsername(),user.getPassword());
-        if (signal==0){
-            user.setUsername(null);
-            user.setPassword(null);
             return true;
         }
         return false;
