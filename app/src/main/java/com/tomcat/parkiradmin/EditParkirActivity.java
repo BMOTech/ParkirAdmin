@@ -36,6 +36,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import static android.R.attr.value;
 import static com.tomcat.parkiradmin.R.id.inputCapacity;
 import static com.tomcat.parkiradmin.R.id.inputPrice;
 import static com.tomcat.parkiradmin.R.id.map;
@@ -47,19 +48,22 @@ public class EditParkirActivity extends AddParkirActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setTitle(R.string.title_edit_parkir);
-
         Bundle bundle = getIntent().getExtras();
 
         if(bundle != null) {
             String parkirId = "" + bundle.getInt("idParkir");
             int indexTab = bundle.getInt("indexTab");
 
+            Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
             if (indexTab == 1) {
                 action = 3;
+                getSupportActionBar().setTitle(R.string.title_filter_parkir);
+                btnSubmit.setText(R.string.btnConfirm);
                 getDetailRequestedParkir(parkirId);
             } else {
                 action = 2;
+                getSupportActionBar().setTitle(R.string.title_edit_parkir);
+                btnSubmit.setText(R.string.btnSave);
                 getDetailParkir(parkirId);
             }
         }

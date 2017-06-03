@@ -2,6 +2,7 @@ package com.tomcat.parkiradmin;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -130,11 +131,24 @@ public class ListParkirFragment extends Fragment {
         mMap.getUiSettings().setRotateGesturesEnabled(true);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
-        // Show the current location in Google Map
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(userLatLng));
-        // Zoom in the Google Map
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+        mMap.setOnMyLocationChangeListener(myLocationChangeListener);
     }
+
+    private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
+        @Override
+        public void onMyLocationChange(Location location) {
+            userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+            //mMarker = mMap.addMarker(new MarkerOptions().position(loc));
+            if(mMap != null){
+//                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 14.0f));
+                // Show the current location in Google Map
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(userLatLng));
+                // Zoom in the Google Map
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
+            }
+        }
+    };
+
     public void setUpParkir(){
         if(parkir!=null){
             LatLng coordinate[] = new LatLng[parkir.length];

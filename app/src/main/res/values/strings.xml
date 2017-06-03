@@ -4,6 +4,7 @@
     <string name="title_detail_parkir">Rute Parkir</string>
     <string name="title_new_parkir">New Parkir</string>
     <string name="title_edit_parkir">Edit Parkir</string>
+    <string name="title_filter_parkir">Konfirmasi Parkir</string>
     <string name="title_preference">Setting</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -49,6 +50,8 @@
     <string name="textParkirPrice">Price</string>
     <string name="textParkirCapacity">Capacity</string>
     <string name="btnSubmit">Submit</string>
+    <string name="btnSave">Simpan</string>
+    <string name="btnConfirm">Konfirmasi</string>
 
     <string name="t1">Sudah memiliki akun?</string>
     <string name="t2">Baru menggunakan aplikasi ini?</string>
